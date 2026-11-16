@@ -180,7 +180,8 @@ services:
   ml-api:
     build:
       context: ./subsystems/ml-risk
-      dockerfile: Dockerfile.api
+      # свой Dockerfile: кэш pip между сборками (см. docker/ml-api.Dockerfile)
+      dockerfile: ../../docker/ml-api.Dockerfile
     environment:
       - REDIS_URL=redis://ml-redis:6379/0
       - DEBUG=false
@@ -229,7 +230,11 @@ services:
     healthcheck: *redis_health
 
   creativity-web:
-    build: ./subsystems/creativity
+    # свой Dockerfile: CPU-версия PyTorch и кэш pip (см. docker/creativity.Dockerfile)
+    build:
+      context: ./subsystems/creativity
+      dockerfile: ../../docker/creativity.Dockerfile
+    image: asni-platform-creativity
     # migrate добавлен здесь: в исходном compose его нет, без него пустая БД не заработает
     command: sh -c "python manage.py migrate --noinput && gunicorn creativity_platform.wsgi:application --bind 0.0.0.0:8000 --timeout 300"
     environment: &creativity_env
@@ -259,7 +264,9 @@ services:
     restart: unless-stopped
 
   creativity-worker:
-    build: ./subsystems/creativity
+    # тот же образ, что у creativity-web — не собирается второй раз
+    image: asni-platform-creativity
+    pull_policy: never
     command: celery -A creativity_platform worker -l warning
     environment: *creativity_env
     volumes:
