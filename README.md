@@ -27,6 +27,13 @@ docker compose up -d --build
 sh scripts/smoke-test.sh
 ```
 
+> **Windows:** клонируйте с `-c core.autocrlf=false`, иначе Git переведёт `gradlew` и
+> `entrypoint.sh` в CRLF и сборка упадёт с `./gradlew: not found`:
+> ```bash
+> git -c core.autocrlf=false clone --recurse-submodules https://github.com/KAPUSHA228/asni-platform.git
+> ```
+> Если уже склонировано: `sh scripts/fix-line-endings.sh`.
+
 Если репозиторий склонирован без `--recurse-submodules`:
 
 ```bash
