@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>АСНИ — подсистемы</title>
+<style>
+  :root { --bg:#f6f7f9; --card:#fff; --fg:#1b1f24; --muted:#5b6470; --accent:#2457d6; --border:#e2e5ea; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#111418; --card:#1a1e24; --fg:#e8ebef; --muted:#9aa3ad; --accent:#7aa2ff; --border:#2a3038; } }
+  * { box-sizing:border-box; }
+  body { margin:0; font:16px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; background:var(--bg); color:var(--fg); }
+  main { max-width:880px; margin:0 auto; padding:48px 16px; }
+  h1 { margin:0 0 4px; font-size:28px; }
+  p.lead { margin:0 0 32px; color:var(--muted); }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(250px, 1fr)); gap:16px; }
+  a.card { display:block; padding:20px; background:var(--card); border:1px solid var(--border); border-radius:12px; color:inherit; text-decoration:none; }
+  a.card:hover { border-color:var(--accent); }
+  a.card b { display:block; margin-bottom:6px; color:var(--accent); }
+  a.card span { color:var(--muted); font-size:14px; }
+  .note { margin-top:32px; color:var(--muted); font-size:14px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>АСНИ</h1>
+  <p class="lead">Автоматизированная система научных исследований: объединённый стенд подсистем.</p>
+  <div class="grid">
+    <a class="card" data-port="8101" href="#"><b>Мониторинг академических рисков</b><span>ML-модели, SHAP, дрейф данных</span></a>
+    <a class="card" data-port="8102" href="#"><b>Анализ креативности</b><span>NLP-метрики: fluency, originality, flexibility</span></a>
+    <a class="card" data-port="8103" href="#"><b>Конструктор анкет</b><span>Создание и проведение опросов</span></a>
+  </div>
+  <p class="note">API АСНИ (auth, опросы, датасеты, аналитика) — через gateway на порту 8080, префикс <code>/api/v1/</code>.<br>
+  Подсистема загрузки данных — десктопное JavaFX-приложение, запускается отдельно (см. README).</p>
+</main>
+<script>
+  // Ссылки строятся от текущего хоста, чтобы стенд работал не только на localhost.
+  for (const a of document.querySelectorAll('a[data-port]')) {
+    a.href = location.protocol + '//' + location.hostname + ':' + a.dataset.port + (a.dataset.path || '/');
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+[submodule "subsystems/ml-risk"]
+	path = subsystems/ml-risk
+	url = https://github.com/KAPUSHA228/diplom.git
+[submodule "subsystems/creativity"]
+	path = subsystems/creativity
+	url = https://github.com/ermilovad/creativity-analysis-subsystem.git
+[submodule "subsystems/survey-constructor"]
+	path = subsystems/survey-constructor
+	url = https://github.com/sanya2905/survey-constructor-service.git
+[submodule "subsystems/data-loading"]
+	path = subsystems/data-loading
+	url = https://github.com/KaterinaKaraseva/DataLoadingSubsystemFX.git
+[submodule "subsystems/asni/auth-service"]
+	path = subsystems/asni/auth-service
+	url = https://github.com/ASNI-UNN/auth-service.git
+[submodule "subsystems/asni/gateway-service"]
+	path = subsystems/asni/gateway-service
+	url = https://github.com/ASNI-UNN/gateway-service.git
+[submodule "subsystems/asni/survey-service"]
+	path = subsystems/asni/survey-service
+	url = https://github.com/ASNI-UNN/survey-service.git
+[submodule "subsystems/asni/data-storage-service"]
+	path = subsystems/asni/data-storage-service
+	url = https://github.com/ASNI-UNN/data-storage-service.git
+[submodule "subsystems/asni/analytics-service"]
+	path = subsystems/asni/analytics-service
+	url = https://github.com/ASNI-UNN/analytics-service.git
