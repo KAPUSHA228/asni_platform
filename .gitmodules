@@ -1,6 +1,7 @@
 [submodule "subsystems/ml-risk"]
 	path = subsystems/ml-risk
 	url = https://github.com/KAPUSHA228/diplom.git
+	ignore = untracked
 [submodule "subsystems/creativity"]
 	path = subsystems/creativity
 	url = https://github.com/ermilovad/creativity-analysis-subsystem.git
