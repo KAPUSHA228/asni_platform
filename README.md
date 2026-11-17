@@ -26,8 +26,8 @@ stack, build overrides, helper scripts and integration docs. **Subsystem code is
 ## Quick start
 
 ```bash
-git clone --recurse-submodules https://github.com/KAPUSHA228/asni-platform.git
-cd asni-platform
+git clone --recurse-submodules https://github.com/KAPUSHA228/asni_platform.git
+cd asni_platform
 cp .env.example .env
 sh scripts/build.sh          # build all images (retries on network errors)
 docker compose up -d
@@ -40,7 +40,7 @@ to a few hours depending on your connection. Subsequent builds use the cache.
 > **Windows users:** clone with `core.autocrlf=false`, otherwise Git converts `gradlew`
 > and `entrypoint.sh` to CRLF line endings and the build fails with `./gradlew: not found`:
 > ```bash
-> git -c core.autocrlf=false clone --recurse-submodules https://github.com/KAPUSHA228/asni-platform.git
+> git -c core.autocrlf=false clone --recurse-submodules https://github.com/KAPUSHA228/asni_platform.git
 > ```
 > Already cloned? Run `sh scripts/fix-line-endings.sh` (Git Bash).
 
@@ -94,7 +94,7 @@ docker compose down -v               # stop and DELETE all databases
 ## Repository layout
 
 ```
-asni-platform/
+asni_platform/
 ├── subsystems/                 # git submodules (subsystem source code)
 │   ├── ml-risk/
 │   ├── creativity/

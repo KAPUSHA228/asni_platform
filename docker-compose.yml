@@ -1,6 +1,6 @@
 # АСНИ — объединённый стенд всех подсистем.
 #
-#   git clone --recurse-submodules <repo> && cd asni-platform
+#   git clone --recurse-submodules <repo> && cd asni_platform
 #   cp .env.example .env
 #   docker compose up -d --build
 #
