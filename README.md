@@ -8,13 +8,20 @@ stack, build overrides, helper scripts and integration docs. **Subsystem code is
 
 ## Subsystems
 
-| Subsystem | Path | Repository | Stack |
-|---|---|---|---|
-| Academic risk monitoring (ML) | `subsystems/ml-risk` | [KAPUSHA228/diplom](https://github.com/KAPUSHA228/diplom) | FastAPI, Ray, React |
-| Creativity analysis | `subsystems/creativity` | [ermilovad/creativity-analysis-subsystem](https://github.com/ermilovad/creativity-analysis-subsystem) | Django, Celery, spaCy, sentence-transformers |
-| Survey constructor | `subsystems/survey-constructor` | [sanya2905/survey-constructor-service](https://github.com/sanya2905/survey-constructor-service) | FastAPI, React, SurveyJS |
-| Data loading (desktop) | `subsystems/data-loading` | [KaterinaKaraseva/DataLoadingSubsystemFX](https://github.com/KaterinaKaraseva/DataLoadingSubsystemFX) | JavaFX 17, Maven |
-| ASNI backend: auth, gateway, survey, data-storage, analytics | `subsystems/asni/*` | [ASNI-UNN](https://github.com/ASNI-UNN) | Java 21, Spring Boot |
+Submodules point to forks under [KAPUSHA228](https://github.com/KAPUSHA228); the original
+repositories are listed as *upstream*.
+
+| Subsystem | Path | Submodule (fork) | Upstream | Stack |
+|---|---|---|---|---|
+| Academic risk monitoring (ML) | `subsystems/ml-risk` | [diplom](https://github.com/KAPUSHA228/diplom) | — (original) | FastAPI, Ray, React |
+| Creativity analysis | `subsystems/creativity` | [creativity-analysis-subsystem](https://github.com/KAPUSHA228/creativity-analysis-subsystem) | [ermilovad](https://github.com/ermilovad/creativity-analysis-subsystem) | Django, Celery, spaCy, sentence-transformers |
+| Survey constructor | `subsystems/survey-constructor` | [survey-constructor-service](https://github.com/KAPUSHA228/survey-constructor-service) | [sanya2905](https://github.com/sanya2905/survey-constructor-service) | FastAPI, React, SurveyJS |
+| Data loading (desktop) | `subsystems/data-loading` | [DataLoadingSubsystemFX](https://github.com/KAPUSHA228/DataLoadingSubsystemFX) | [KaterinaKaraseva](https://github.com/KaterinaKaraseva/DataLoadingSubsystemFX) | JavaFX 17, Maven |
+| ASNI auth | `subsystems/asni/auth-service` | [auth-service](https://github.com/KAPUSHA228/auth-service) | [ASNI-UNN](https://github.com/ASNI-UNN/auth-service) | Java 21, Spring Boot |
+| ASNI API gateway | `subsystems/asni/gateway-service` | [gateway-service](https://github.com/KAPUSHA228/gateway-service) | [ASNI-UNN](https://github.com/ASNI-UNN/gateway-service) | Spring Cloud Gateway |
+| ASNI surveys | `subsystems/asni/survey-service` | [survey-service](https://github.com/KAPUSHA228/survey-service) | [ASNI-UNN](https://github.com/ASNI-UNN/survey-service) | Java 21, Spring Boot |
+| ASNI data storage | `subsystems/asni/data-storage-service` | [data-storage-service](https://github.com/KAPUSHA228/data-storage-service) | [ASNI-UNN](https://github.com/ASNI-UNN/data-storage-service) | Java 21, Spring Boot |
+| ASNI analytics | `subsystems/asni/analytics-service` | [analytics-service](https://github.com/KAPUSHA228/analytics-service) | [ASNI-UNN](https://github.com/ASNI-UNN/analytics-service) | Java 21, Spring Boot |
 
 ## Requirements
 
@@ -125,8 +132,16 @@ never breaks this stack by itself.
   sh scripts/build.sh && docker compose up -d && sh scripts/smoke-test.sh
   git add subsystems && git commit -m "chore: bump subsystems"
   ```
-- **Change a subsystem's code:** commit and push in *that subsystem's* repository
+- **Change a subsystem's code:** commit and push in *that subsystem's* fork
   (`cd subsystems/<name>`, regular git workflow), then bump the pointer here as above.
+  To get the change into the original repository, open a pull request from the fork to upstream.
+- **Pull new changes from the original authors into a fork:** on GitHub, open the fork and click
+  **Sync fork → Update branch**, then run `sh scripts/update-submodules.sh` here. Or from the command line:
+  ```bash
+  cd subsystems/creativity
+  git remote add upstream https://github.com/ermilovad/creativity-analysis-subsystem.git  # once
+  git fetch upstream && git merge upstream/main && git push origin main
+  ```
 - **Don't patch subsystem code from this repository.** Anything needed for the subsystems
   to run together (service names, ports, env vars) is overridden in `docker-compose.yml`.
 
